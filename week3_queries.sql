@@ -1,4 +1,4 @@
--- ============================================================
+-- ============================================================ 
 -- IDX Exchange — Data Analyst Internship
 -- Week 3: Aggregations & Grouping
 -- Tables: rets_property
