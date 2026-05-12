@@ -159,3 +159,20 @@ WHERE L_SystemPrice IS NOT NULL
 GROUP BY L_Zip
 HAVING AVG(L_SystemPrice) > 800000
 ORDER BY avg_price DESC;
+
+-- Combined Query:
+-- Top cities ranked by both highest average list price and highest average price per sqft
+
+SELECT
+    L_City,
+    COUNT(*) AS total_listings,
+    ROUND(AVG(L_SystemPrice), 0) AS avg_price,
+    ROUND(AVG(LM_Int2_3), 0) AS avg_sqft,
+    ROUND(AVG(L_SystemPrice / LM_Int2_3), 2) AS avg_price_per_sqft
+FROM rets_property
+WHERE L_SystemPrice IS NOT NULL
+    AND LM_Int2_3 > 0
+GROUP BY L_City
+HAVING COUNT(*) >= 10
+ORDER BY avg_price DESC, avg_price_per_sqft DESC
+LIMIT 15;
